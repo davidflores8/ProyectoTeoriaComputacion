@@ -86,6 +86,11 @@ public class Principal extends javax.swing.JFrame {
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
         String expresion = texto.getText();
+        AdministrarTexto at = new AdministrarTexto();
+        at.cargarArchivo();
+        expresion = at.getDatos();
+        texto.setText(expresion);
+        
     }//GEN-LAST:event_jButton2MouseClicked
 
     /**
@@ -99,7 +104,7 @@ public class Principal extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
