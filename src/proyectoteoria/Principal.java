@@ -28,60 +28,56 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         texto = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        BTN_evaluar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 270, -1));
 
-        jButton1.setText("Evaluar expresión regular");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        BTN_evaluar.setText("Evaluar expresión regular");
+        BTN_evaluar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                BTN_evaluarMouseClicked(evt);
             }
         });
+        getContentPane().add(BTN_evaluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
 
-        jButton2.setText("Cargar expresion desde el archivo de texto");
+        jButton2.setText("Cargar archivo de texto");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
             }
         });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(texto)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(49, 49, 49))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(texto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(199, Short.MAX_VALUE))
-        );
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoteoria/fondo para el proyecto.jpg"))); // NOI18N
+        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 310));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
+    private void BTN_evaluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_evaluarMouseClicked
+        /*pendiente de saber si vamos a hacer las validaciones de la cadena aqui o en otra clase
+         pero en primera instancia las wa dejar aqui
+         */
         String expresion = texto.getText();
+        boolean abc = true, binario = false;
+        if (expresion.contains("a") && expresion.contains("b") && expresion.contains("c") && !expresion.contains("0") && !expresion.contains("1")) {
+            abc = true;
+        } else {
+            abc = false;
+            if (expresion.contains("1") && expresion.contains("0") && !expresion.contains("a") && !expresion.contains("b") && !expresion.contains("c")) {
+                binario = true;
+            }
+        }
         
-
-    }//GEN-LAST:event_jButton1MouseClicked
+        Evaluacion ev= new Evaluacion(expresion);
+        System.out.println("abc: " + abc + " binar :" + binario);
+        System.out.println("la expresion ingresada al ser evaluada,\nse determinó que:"
+                + " \nEvaluacion 2: "+ev.problema2()+"\nEvaluacion 3: "+ev.problema3());
+    }//GEN-LAST:event_BTN_evaluarMouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
@@ -90,7 +86,7 @@ public class Principal extends javax.swing.JFrame {
         at.cargarArchivo();
         expresion = at.getDatos();
         texto.setText(expresion);
-        
+
     }//GEN-LAST:event_jButton2MouseClicked
 
     /**
@@ -129,7 +125,8 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton BTN_evaluar;
+    private javax.swing.JLabel Fondo;
     private javax.swing.JButton jButton2;
     private javax.swing.JTextField texto;
     // End of variables declaration//GEN-END:variables
