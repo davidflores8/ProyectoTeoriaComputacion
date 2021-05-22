@@ -5,6 +5,10 @@
  */
 package proyectoteoria;
 
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+
 /**
  *
  * @author David
@@ -30,6 +34,7 @@ public class Principal extends javax.swing.JFrame {
         texto = new javax.swing.JTextField();
         BTN_evaluar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        salidaFinal = new javax.swing.JTextField();
         Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,7 +47,7 @@ public class Principal extends javax.swing.JFrame {
                 BTN_evaluarMouseClicked(evt);
             }
         });
-        getContentPane().add(BTN_evaluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
+        getContentPane().add(BTN_evaluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, -1, -1));
 
         jButton2.setText("Cargar archivo de texto");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -50,10 +55,13 @@ public class Principal extends javax.swing.JFrame {
                 jButton2MouseClicked(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, -1, -1));
+
+        salidaFinal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(salidaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 330, -1));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoteoria/fondo para el proyecto.jpg"))); // NOI18N
-        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 310));
+        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 310));
 
         pack();
         setLocationRelativeTo(null);
@@ -64,22 +72,66 @@ public class Principal extends javax.swing.JFrame {
          pero en primera instancia las wa dejar aqui
          */
         String expresion = texto.getText();
-        boolean abc = true, binario = false;
-        if (expresion.contains("a") && expresion.contains("b") && expresion.contains("c") && !expresion.contains("0") && !expresion.contains("1")) {
-            abc = true;
-        } else {
-            abc = false;
-            if (expresion.contains("1") && expresion.contains("0") && !expresion.contains("a") && !expresion.contains("b") && !expresion.contains("c")) {
-                binario = true;
+        boolean abc = true, binario = true;
+        String errorTexto = "Tiene caracteres distintos a: a, b, c.";
+        String errorBinario = "Tiene caracteres distintos a: 0 y 1.";
+        for (int i = 0; i < expresion.length(); i++) {
+            if(expresion.charAt(i)=='a' || expresion.charAt(i)=='b' || expresion.charAt(i)=='c'){
+                abc = true;
+            }
+            else{
+                abc = false;
+                break;
             }
         }
+
+        for (int i = 0; i < expresion.length(); i++) {
+            if(expresion.charAt(i)=='0' || expresion.charAt(i)=='1'){
+                binario = true;
+            }
+            else{
+                binario = false;
+                break;
+            }
+        }
+        System.out.println("abc: " + abc + " binar :" + binario);
         
         Evaluacion ev= new Evaluacion(expresion);
-        System.out.println("abc: " + abc + " binar :" + binario);
-        System.out.println("la expresion ingresada al ser evaluada,\nse determinó que:"
-                + " \nEvaluacion 2: "+ev.problema2()+"\nEvaluacion 3: "+ev.problema3());
-        System.out.println("Problema1:" + ev.problema1());
-        System.out.println("Problema4:" + ev.problema4());
+        if(abc==true){
+            if(ev.problema2()==true){
+                salidaFinal.setText("La cadena fue aceptada");
+                salidaFinal.setForeground(Color.green);
+            }
+            else{
+                salidaFinal.setText("La cadena fue rechazada");
+                salidaFinal.setForeground(Color.red);
+            }
+        }
+        else if (binario==true){
+            if(ev.problema1()==true || ev.problema3()==true || ev.problema4()==true){
+                salidaFinal.setText("La cadena fue aceptada");
+                salidaFinal.setForeground(Color.green);
+            }
+            else{
+                salidaFinal.setText("La cadena fue rechazada");
+                salidaFinal.setForeground(Color.red);
+            }
+        }
+        else {
+            salidaFinal.setText("La cadena ingresada es incorrecta");
+            salidaFinal.setForeground(Color.red);
+        }
+//        else if (abc==false){
+//            salidaFinal.setText(errorTexto);
+//            salidaFinal.setForeground(Color.red);
+//        }
+//        
+//        else if(binario==false){
+//            salidaFinal.setText(errorBinario);
+//            salidaFinal.setForeground(Color.red);
+//        }
+        
+        
     }//GEN-LAST:event_BTN_evaluarMouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -131,6 +183,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton BTN_evaluar;
     private javax.swing.JLabel Fondo;
     private javax.swing.JButton jButton2;
+    private javax.swing.JTextField salidaFinal;
     private javax.swing.JTextField texto;
     // End of variables declaration//GEN-END:variables
 }
