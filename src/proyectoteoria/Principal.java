@@ -56,6 +56,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 310));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_evaluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_evaluarMouseClicked
@@ -77,6 +78,8 @@ public class Principal extends javax.swing.JFrame {
         System.out.println("abc: " + abc + " binar :" + binario);
         System.out.println("la expresion ingresada al ser evaluada,\nse determinó que:"
                 + " \nEvaluacion 2: "+ev.problema2()+"\nEvaluacion 3: "+ev.problema3());
+        System.out.println("Problema1:" + ev.problema1());
+        System.out.println("Problema4:" + ev.problema4());
     }//GEN-LAST:event_BTN_evaluarMouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
